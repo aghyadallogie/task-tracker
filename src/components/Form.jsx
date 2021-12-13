@@ -1,8 +1,9 @@
-import React, { useContext, useState } from "react";
-import { tasksContext } from "../App";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addTaskAction } from "../store/actions";
 
 export const Form = () => {
-  const { handleAdd } = useContext(tasksContext);
+  const dispatch = useDispatch();
 
   const [task, setTask] = useState({
     id: Date.now(),
@@ -14,7 +15,7 @@ export const Form = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    handleAdd(task);
+    dispatch(addTaskAction(task));
   };
 
   return (

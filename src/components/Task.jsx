@@ -1,8 +1,14 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { delTaskAction } from "../store/actions";
 
-export const Task = ({ task, handleDel }) => {
+export const Task = ({ task }) => {
+  const dispatch = useDispatch();
   return (
-    <div style={taskCard} onDoubleClick={() => handleDel(task.id)}>
+    <div
+      style={taskCard}
+      onDoubleClick={() => dispatch(delTaskAction(task.id))}
+    >
       <h1>{task.title}</h1>
       <h2>{task.desc}</h2>
       <h3>status: {task.done ? "finished" : "unfinished"} </h3>
