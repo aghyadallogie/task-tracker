@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { createContext, useState } from "react";
 import "./App.css";
 import { Form } from "./components/Form";
 import { List } from "./components/List";
+
+export const tasksContext = createContext();
 
 function App() {
   const [tasks, setTasks] = useState([
@@ -23,10 +25,12 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <Form tasks={tasks} handleAdd={handleAdd} />
-      <List tasks={tasks} handleDel={handleDel} />
-    </div>
+    <tasksContext.Provider value={{tasks, handleAdd, handleDel}}>
+      <div className="App">
+        <Form />
+        <List />
+      </div>
+    </tasksContext.Provider>
   );
 }
 

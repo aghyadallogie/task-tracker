@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { tasksContext } from "../App";
 
-export const Form = ({ handleAdd }) => {
+export const Form = () => {
+  const { handleAdd } = useContext(tasksContext);
+
   const [task, setTask] = useState({
     id: Date.now(),
     title: "title",
