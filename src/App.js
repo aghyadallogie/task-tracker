@@ -1,31 +1,22 @@
-import { useState } from "react";
 import "./App.css";
+import { useSelector } from "react-redux";
 import { Form } from "./components/Form";
 import { List } from "./components/List";
+import { Login } from "./components/Login";
 
 function App() {
-  const [tasks, setTasks] = useState([
-    {
-      id: Math.random(),
-      title: "title",
-      desc: "desc",
-      done: false,
-      deadline: "22.12.22",
-    },
-  ]);
-
-  const handleAdd = (task) => {
-    setTasks((prev) => [...prev, task]);
-  };
-
-  const handleDel = (id) => {
-    setTasks((prev) => prev.filter((task) => task.id !== id));
-  };
+  const auth = useSelector((state) => state.user.authenticated);
 
   return (
     <div className="App">
-      <Form tasks={tasks} handleAdd={handleAdd} />
-      <List tasks={tasks} handleDel={handleDel} />
+      {auth ? (
+        <>
+          <Form />
+          <List />
+        </>
+      ) : (
+        <Login />
+      )}
     </div>
   );
 }

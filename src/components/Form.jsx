@@ -1,6 +1,12 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { addTaskAction } from "../store/actions/tasksActions";
+import { logoutAction } from "../store/actions/usersActions";
 
-export const Form = ({ handleAdd }) => {
+export const Form = () => {
+  const dispatch = useDispatch();
+
   const [task, setTask] = useState({
     id: Date.now(),
     title: "title",
@@ -11,7 +17,7 @@ export const Form = ({ handleAdd }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    handleAdd(task);
+    dispatch(addTaskAction(task));
   };
 
   return (
@@ -37,6 +43,7 @@ export const Form = ({ handleAdd }) => {
         />
       </label>
       <input type="submit" value="Submit" />
+      <input type="button" value="Logout" onClick={() => dispatch(logoutAction())} />
     </form>
   );
 };
